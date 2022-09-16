@@ -6,14 +6,16 @@ public class InsertSort extends Sort{
     /**
      * 插入排序
      */
-   static void insertSort(){
+   static int[] insertSort(int[] nums){
+       if(nums.length<=1)
+           return nums;
         for(int i=1;i<nums.length;i++){
            //记录要插入的值
            int tempNum=nums[i];
 
            //记录下要移动的位置
            int j=i;
-           while (tempNum<nums[j-1]&&j>0){
+           while (j>0&&tempNum<nums[j-1]){
                nums[j]=nums[j-1];
                j--;
            }
@@ -22,23 +24,12 @@ public class InsertSort extends Sort{
            }
 
         }
+        return nums;
 
     }
-
-    /**
-     * 位置移动
-     * @param startIndex
-     * @param endIndex
-     */
-    static void move(int startIndex,int endIndex){
-        for(int i=endIndex;i>startIndex;i--){
-           nums[i]=nums[i-1];
-        }
-    }
-
 
     public static void main(String[] args) {
-        insertSort();
+        insertSort(nums);
         printNums();
     }
 }

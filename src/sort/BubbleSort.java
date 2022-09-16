@@ -1,5 +1,8 @@
 package sort;
 
+/**
+ *  冒泡
+ */
 public class BubbleSort extends Sort{
 
 

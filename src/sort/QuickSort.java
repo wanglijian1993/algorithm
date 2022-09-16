@@ -4,56 +4,57 @@ public class QuickSort extends Sort{
 
 
     public static void main(String[] args) {
-
-        quickSort(0,nums.length);
+        quictSort(0,nums.length);
         printNums();
 
+
+
     }
 
-   static void quickSort(int begin,int end){
+    public static void quictSort(int begin,int end){
 
-        if(end-begin<2){
+        if(end-begin<2)
             return;
-        }
-        int mid=pivotIndex(begin,end);
-        quickSort(begin,mid);
-        quickSort(mid+1,end);
 
+        int mid=pivotIndex(begin,end);
+
+        quictSort(begin,mid);
+        quictSort(mid+1,end);
 
     }
 
-    public static int pivotIndex(int begin,int end){
-        //备份begin位置的元素
-        int pivot=nums[begin];
+    private static int pivotIndex(int begin,int end) {
+
+        int povit=nums[begin];
         end--;
+        while (end>begin){
 
-
-        while (begin<end){
-            while (begin<end) {
-                if (nums[end] > pivot) { //右边元素>左边
+            while (end>begin) {
+                if (povit < nums[end]) {
                     end--;
-                }
-                //右边元素<=左边元素
-                else {
+                } else {
                     nums[begin++] = nums[end];
-                    break;
+                      break;
                 }
             }
 
-            while (begin<end){
-                if(nums[begin]<pivot){
+            if(end>begin) {
+
+                if (povit > nums[begin]) {
                     begin++;
-                }else{
+                } else {
                     nums[end--]=nums[begin];
                     break;
                 }
             }
 
         }
-        //将轴点元素放入最终的位置
-        nums[begin]=pivot;
-        //返回轴点元素
+
+
+        nums[begin]=povit;
         return begin;
+
     }
+
 
 }
