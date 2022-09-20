@@ -5,6 +5,7 @@ public class RadixSort extends Sort{
 
     public static void main(String[] args) {
         sort();
+
     }
 
 

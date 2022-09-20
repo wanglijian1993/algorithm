@@ -1,8 +1,10 @@
+import circle.CircleQueue;
+
 import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
-     System.out.println(fib2(60));
+//     System.out.println(fib2(60));
 
      //hascode =((j*31+a)*n+c)*n+k
 //     String str="jack";
@@ -13,9 +15,30 @@ public class Main {
 //     }
 //    System.out.println(hashcode);
 //    System.out.println(str.hashCode() );
-
+        testCircleQueue();
 
     }
+
+static void testCircleQueue(){
+    CircleQueue<Integer> queue = new CircleQueue<Integer>();
+    // 0 1 2 3 4 5 6 7 8 9
+    for (int i = 0; i < 10; i++) {
+        queue.enQueue(i);
+    }
+    // null null null null null 5 6 7 8 9
+    for (int i = 0; i < 5; i++) {
+        queue.deQueue();
+    }
+    // 15 16 17 18 19 5 6 7 8 9
+    for (int i = 15; i < 20; i++) {
+        queue.enQueue(i);
+    }
+    while (!queue.isEmpty()) {
+        System.out.println(queue.deQueue());
+    }
+    System.out.println(queue);
+}
+
     static void calculate(int j){
 
         for (int i=0;i<10;i++)
