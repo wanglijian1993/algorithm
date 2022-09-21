@@ -65,6 +65,45 @@ public class BinaryTree<E> implements IBinaryTree {
         levelOrder(root);
         return 1;
     }
+      //后继节点
+      protected Node<E> succsesor(Node<E> e1){
+        Node<E> node=e1.right;
+        if(node!=null){
+
+            while (node.left!=null){
+                node=node.left;
+            }
+            return node;
+
+        }else{
+
+            while (node.parent!=null&&node.parent.right==node){
+                node=node.parent;
+            }
+
+        }
+        return node.parent;
+
+      }
+      //前驱结点
+      protected Node<E> predecessor(Node<E> e1){
+        Node<E> node=e1.left;
+        //如果left不为null直接获取当前left的右节点直至为null
+         if(node!=null){
+            while (node.right!=null){
+                    node=node.right;
+            }
+            return node;
+        }else
+        //如果left为null直接获取父节点node!=node.paret.left
+        {
+            while (node.parent!=null&&node==node.parent.left){
+                node=node.parent;
+            }
+        }
+          return node.parent;
+
+      }
 
     private void levelOrder(Node<E> node){
         if(node==null)
@@ -114,7 +153,12 @@ public class BinaryTree<E> implements IBinaryTree {
             this.right = right;
             this.value = value;
         }
-
+        public boolean isLeftChild() {
+            return parent != null && this == parent.left;
+        }
+        public boolean isRightChild() {
+            return parent != null && this == parent.right;
+        }
         protected boolean hasTwoChild(){
             if(this.left!=null&&this.right!=null){
                 return true;
@@ -128,7 +172,7 @@ public class BinaryTree<E> implements IBinaryTree {
          * nonchild 0
          * @return
          */
-        private int hasChild(){
+        protected int hasChild(){
             if(this.left!=null){
                 return 1;
             }else if(this.right!=null){
@@ -137,5 +181,17 @@ public class BinaryTree<E> implements IBinaryTree {
             return 0;
         }
 
+        /**
+         * left 1
+         * right 2
+         * @return
+         */
+        protected int direction(){
+
+            if(this==parent.left){
+                return 1;
+            }
+            return 2;
+        }
     }
 }

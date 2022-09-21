@@ -15,7 +15,9 @@ public class Main {
 //     }
 //    System.out.println(hashcode);
 //    System.out.println(str.hashCode() );
-        testCircleQueue();
+//        testCircleQueue();
+
+
 
     }
 

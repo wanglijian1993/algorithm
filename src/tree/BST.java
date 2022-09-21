@@ -1,6 +1,6 @@
 package tree;
 
-public class BST<E> extends BinaryTree<E>  {
+public abstract class BST<E> extends BinaryTree<E>  {
 
    private Comparable<E> comparable;
 
@@ -42,27 +42,58 @@ public class BST<E> extends BinaryTree<E>  {
         size++;
 
     }
+    protected abstract void afterAdd(Node<E> node);
 
-    private Node<E> createNode(E value,Node p){
-        Node<E> node=new Node<E>(value);
-        node.parent=p;
-        return node;
-    }
+    protected abstract Node<E> createNode(E element, Node<E> parent);
+
+//    private Node<E> createNode(E value,Node p){
+//        Node<E> node=new Node<E>(value);
+//        node.parent=p;
+//        return node;
+//    }
 
 
-    public E remove(E e1) {
+    public void remove(E e1) {
 
         Node<E> node=Node(e1);
          if(node==null)
-             return null;
+             return;
           //有二个Child
           if(node.hasTwoChild()){
+              Node<E> predecessor = predecessor(node);
+              node.value=predecessor.value;
+              // 删除后继节点
+              node=predecessor;
+          }
+          //删除node节点 (node的度必须是0,1)
+         Node<E> nChild=node.left==null?node.right:node.left;
 
-              Node<E> temp=node.left;
+          if(nChild!=null){
+              Node<E> nParent=node.parent;
+              if(nParent==null)
+              {
+                 //parent root接点
+                 root=node;
+              }
+              else if(nParent.left==node){
+                  nParent.left=nChild;
+              }else if(nParent.right==node){
+                  nParent.right=nChild;
+              }
+
+          }else if(node.parent==null){
+             //note就是root节点
+              root=null;
+          }else{
+              if (node == node.parent.left) {
+                  node.parent.left = null;
+              } else { // node == node.parent.right
+                  node.parent.right = null;
+              }
+
 
           }
 
-//        return 0;
     }
 
 
@@ -84,6 +115,9 @@ public class BST<E> extends BinaryTree<E>  {
         }
         return null;
     }
+
+
+
     private int compare(E node1,E node2){
 
         return ((Comparable<E>)node1).compareTo(node2);
