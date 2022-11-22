@@ -1,5 +1,8 @@
 package dp;
 
+/**
+ *  最长重复字串
+ */
 public class LcsSubString {
     public static void main(String[] args) {
 
